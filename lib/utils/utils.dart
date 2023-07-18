@@ -11,26 +11,6 @@ class Utils {
     );
     return picked;
   }
-
-  static OutlineInputBorder borderStyle() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(
-        color: AppColors.primaryColor,
-        width: 3,
-      ),
-    );
-  }
-
-  static OutlineInputBorder errorBorderStyle() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(
-        color: AppColors.errorColor,
-        width: 3,
-      ),
-    );
-  }
 }
 
 extension IterableExt on Iterable<Widget> {

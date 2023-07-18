@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkedin/theme/app_color.dart';
-import 'package:flutter_linkedin/utils/utils.dart';
 
 ThemeData getThemes() {
   return ThemeData(
@@ -14,9 +13,9 @@ ThemeData getThemes() {
       elevation: 5,
       color: AppColors.primaryColor,
       titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -28,16 +27,36 @@ ThemeData getThemes() {
       ),
       fillColor: AppColors.gray200,
       filled: true,
-      disabledBorder: Utils.borderStyle(),
-      enabledBorder: Utils.borderStyle(),
-      errorBorder: Utils.errorBorderStyle(),
-      focusedBorder: Utils.borderStyle(),
-      focusedErrorBorder: Utils.errorBorderStyle(),
+      disabledBorder: borderStyle(),
+      enabledBorder: borderStyle(),
+      errorBorder: errorBorderStyle(),
+      focusedBorder: borderStyle(),
+      focusedErrorBorder: errorBorderStyle(),
       errorStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
     ),
     useMaterial3: true,
+  );
+}
+
+OutlineInputBorder borderStyle() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: const BorderSide(
+      color: AppColors.primaryColor,
+      width: 3,
+    ),
+  );
+}
+
+OutlineInputBorder errorBorderStyle() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: const BorderSide(
+      color: AppColors.errorColor,
+      width: 3,
+    ),
   );
 }
