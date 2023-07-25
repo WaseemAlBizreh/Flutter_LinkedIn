@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_linkedin/theme/app_color.dart';
 
 class Utils {
   static Future<DateTime?> selectDate(BuildContext context) async {
@@ -10,6 +9,25 @@ class Utils {
       lastDate: DateTime(2101),
     );
     return picked;
+  }
+
+  static Future<DateTime?> selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null){
+      DateTime dateTime = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        picked.hour,
+        picked.minute,
+      );
+      return dateTime;
+    } else {
+      return null;
+    }
   }
 }
 

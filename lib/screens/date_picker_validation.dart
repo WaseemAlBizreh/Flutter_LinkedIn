@@ -13,8 +13,10 @@ class DatePickerValidation extends StatefulWidget {
 class _DatePickerValidationState extends State<DatePickerValidation> {
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DateTime? date;
+  DateTime? time;
 
   void _submit() {
     formKey.currentState!.validate();
@@ -22,14 +24,31 @@ class _DatePickerValidationState extends State<DatePickerValidation> {
 
   void selectDate() async {
     DateTime? pickedDate = await Utils.selectDate(context);
+    final format = DateFormat('yyyy-MM-dd');
+    Intl.defaultLocale = 'ar';
     setState(() {
       date = pickedDate;
       if (date != null) {
         dateController = TextEditingController(
-          text: DateFormat('yyyy-MM-dd').format(date!),
+          text: format.format(date!),
         );
       } else {
         dateController = TextEditingController();
+      }
+    });
+  }
+  void selectTime() async {
+    DateTime? pickedTime = await Utils.selectTime(context);
+    Intl.defaultLocale = 'en';
+    final format = DateFormat.jm();
+    setState(() {
+      time = pickedTime;
+      if (time != null) {
+        timeController = TextEditingController(
+          text: format.format(time!),
+        );
+      } else {
+        timeController = TextEditingController();
       }
     });
   }
@@ -88,6 +107,30 @@ class _DatePickerValidationState extends State<DatePickerValidation> {
                     labelText: "Type your date",
                     prefixIcon: Icon(
                       Icons.calendar_today,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: selectTime,
+                child: TextFormField(
+                  enabled: false,
+                  controller: timeController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  cursorColor: AppColors.primaryColor,
+                  validator: (value) {
+                    if (value.toString().isEmpty) {
+                      return "empty field";
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                    labelText: "Type your Time",
+                    prefixIcon: Icon(
+                      Icons.watch_later_rounded,
                       color: AppColors.primaryColor,
                     ),
                   ),
