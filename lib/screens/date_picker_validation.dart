@@ -24,8 +24,7 @@ class _DatePickerValidationState extends State<DatePickerValidation> {
 
   void selectDate() async {
     DateTime? pickedDate = await Utils.selectDate(context);
-    final format = DateFormat('yyyy-MM-dd');
-    Intl.defaultLocale = 'ar';
+    final format = DateFormat('yyyy-MM-dd', 'ar');
     setState(() {
       date = pickedDate;
       if (date != null) {
@@ -39,8 +38,7 @@ class _DatePickerValidationState extends State<DatePickerValidation> {
   }
   void selectTime() async {
     DateTime? pickedTime = await Utils.selectTime(context);
-    Intl.defaultLocale = 'en';
-    final format = DateFormat.jm();
+    final format = DateFormat.jm('en');
     setState(() {
       time = pickedTime;
       if (time != null) {
@@ -58,7 +56,7 @@ class _DatePickerValidationState extends State<DatePickerValidation> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text("DatePicker Validation"),
+        title: const Text("Validation"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
